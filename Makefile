@@ -9,7 +9,9 @@ VALGRIND_FLAGS=-v --leak-check=full --show-leak-kinds=all  --error-exitcode=99
 SOURCES=Game.cpp Player.cpp Duke.cpp Assassin.cpp Ambassador.cpp Captain.cpp Contessa.cpp
 OBJECTS=$(subst .cpp,.o,$(SOURCES))
 
-
+main:
+	clang++-9 -g Player.cpp Game.cpp Captain.cpp Assassin.cpp Ambassador.cpp main.cpp -o m
+	
 run: demo
 	./demo
 

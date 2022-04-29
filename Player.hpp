@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-
+#include <stdexcept>
 namespace coup{
     
     class Player

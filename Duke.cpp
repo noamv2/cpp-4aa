@@ -9,7 +9,7 @@ void Duke::tax(){change_balance(3);}
 
 void Duke::coup(Player &p){
     if(coins() < 7){
-        throw "Insufficient funds";
+        throw std::invalid_argument("Insufficient funds");
     }
 
     game->remove_player(p);
@@ -17,7 +17,7 @@ void Duke::coup(Player &p){
 
 void Duke::block(Player &p){
     if(!p.took_fa){
-        throw "No foreign add taken";
+        throw std::invalid_argument("No foreign add taken");
     }
     p.change_balance(-2);
 }

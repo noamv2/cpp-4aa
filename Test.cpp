@@ -8,7 +8,7 @@
 #include "Captain.hpp"
 
 using namespace coup;
-TEST_CASE("legal moves"){
+TEST_CASE("Game 1"){
 
     Game game;
     Duke duke {game,"duke1"};
@@ -47,5 +47,17 @@ TEST_CASE("legal moves"){
     CHECK(duke2.coins() == 1);
     CHECK(assassin.coins() == 1);
     CHECK(cap.coins() == 1);
+
+    
+
+    SUBCASE("Turn system tests"){
+        //its duke1 turn now
+        CHECK_THROWS(cap.foreign_aid());
+        CHECK_THROWS(duke2.foreign_aid());
+        CHECK(game.turn() == "duke1");
+
+        
+    }
+    
 
 }

@@ -7,8 +7,6 @@ namespace coup{
 
     class Ambassador:public Player
     {
-    private:
-        Game * game;
     public:
         Ambassador(Game & g, std::string name);
         
@@ -16,7 +14,7 @@ namespace coup{
 
         void transfer(Player &from, Player & to);
         void block(Player &p);
-        void coup(Player &p);
+     
 
     };
 }

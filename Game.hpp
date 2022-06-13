@@ -20,6 +20,9 @@ namespace coup{
         
         void add_Player(Player &p);
         void remove_player(Player &p);
+        void play(Player &p);
+
+
     };
 
 }

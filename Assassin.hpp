@@ -4,8 +4,6 @@
 namespace coup{
     class Assassin: public Player
     {
-    private:
-        Game * game;
     public:
         Assassin(Game & g, std::string name);
         //unique traits

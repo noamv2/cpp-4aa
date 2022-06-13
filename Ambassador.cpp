@@ -2,7 +2,7 @@
 
 using namespace coup;
 
-Ambassador::Ambassador(Game & g,std::string name):Player(name, "Ambassador"), game{&g} {
+Ambassador::Ambassador(Game & g,std::string name):Player(&g, name, "Ambassador") {
     g.add_Player(*this);
 }
 
@@ -20,15 +20,8 @@ void Ambassador::block(Player &p){
 }
 
 void Ambassador::transfer(Player &from, Player &to){
-
+    game->play(*this);
     from.change_balance(-1);
     to.change_balance(1);
 }
 
-void Ambassador::coup(Player &p){
-    if(coins() < 7){
-        throw std::invalid_argument( "Insufficient funds");
-    }
-
-    game->remove_player(p);
-}

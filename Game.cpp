@@ -23,7 +23,12 @@ std::vector<std::string> Game::players(){
     return names;
 }
 
-std::string Game::winner(){return "";}
+std::string Game::winner(){
+    
+    if(players_count > 1){
+        throw std::invalid_argument("Game not done");
+    }
+    return turn();}
 
 void Game::add_Player(Player &p){
     if(players_count > 5){
@@ -57,4 +62,17 @@ void Game::remove_player(Player &p){
         players_q.push(t);
         temp.pop();
     }
+}
+
+//a function that called before each player turn
+void Game::play(Player &p){
+
+    //check that this is the player turn now
+    if(p.get_name() != turn()){
+        throw std::invalid_argument("Cant play out of turn");
+    }
+    //Move the player to the back of the queue
+    players_q.pop();
+    players_q.push(&p);
+    
 }

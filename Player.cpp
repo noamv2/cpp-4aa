@@ -1,27 +1,33 @@
-#include "Player.hpp"
+#include "Game.hpp"
 using namespace coup;
 
 Player::Player(std::string name, std::string role):balance{0}, name{name}, role_name{role},took_fa{false}{
 
 }
 
+Player::Player(Game * g, std::string name, std::string role):game{g},balance{0}, name{name}, role_name{role},took_fa{false}{
+}
+
 void Player::income(){
+    game->play(*this);
     reset_actions();
     ++balance;
 }
 
 void Player::foreign_aid(){
+    game->play(*this);
     reset_actions();
     took_fa = true;
     balance += 2;
 }
 
 void Player::coup(Player & p){
+    game->play(*this);
     reset_actions();
     if(balance < 7){
-        throw "Insufficient funds to coup";
+        throw std::invalid_argument("Insufficient funds to coup");
     }
-
+    game->remove_player(p);
 }
 
 std::string Player::role(){
@@ -36,7 +42,7 @@ int Player::coins(){
 void Player::change_balance(int sum){
     balance += sum;
     if(balance < 0){
-        throw("Cant have negetive balance");
+        balance = 0;
     }
 }
 void Player::reset_actions(){

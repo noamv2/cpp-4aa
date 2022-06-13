@@ -2,11 +2,12 @@
 
 using namespace coup;
 
-Captain::Captain(Game & g, std::string s): Player(s, "Captain"), game{&g} {   
+Captain::Captain(Game & g, std::string s): Player(&g, s, "Captain") {   
     g.add_Player(*this);
 }
 
 void Captain::steal(Player & p){
+    game->play(*this);
     //steal 2 coins from another player
     p.change_balance(-2);
     this->change_balance(+2);
@@ -25,10 +26,3 @@ void Captain::block(Player &p){
     p.action_object->change_balance(2);
 }
 
-void Captain::coup(Player &p){
-    if(coins() < 7){
-        throw std::invalid_argument("Insufficient funds");
-    }
-
-    game->remove_player(p);
-}

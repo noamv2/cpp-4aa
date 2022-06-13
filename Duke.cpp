@@ -1,19 +1,14 @@
 #include "Duke.hpp"
 using namespace coup;
 
-Duke::Duke(Game & g, std::string name):Player(name, "Duke"), game{&g}{
+Duke::Duke(Game & g, std::string name):Player(&g,name, "Duke"){
     g.add_Player(*this);
 }
 
-void Duke::tax(){change_balance(3);}
-
-void Duke::coup(Player &p){
-    if(coins() < 7){
-        throw std::invalid_argument("Insufficient funds");
+void Duke::tax(){
+    game->play(*this);
+    change_balance(3);
     }
-
-    game->remove_player(p);
-}
 
 void Duke::block(Player &p){
     if(!p.took_fa){
